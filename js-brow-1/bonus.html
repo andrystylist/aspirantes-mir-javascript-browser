@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <label for="texto">Escribe algo:</label>
+  <input type="text" id="texto" />
+  <button type="button" class="btn">Validar</button>
+  <p id="resultado"></p>
+
+  <script>
+    const inputTexto = document.getElementById('texto');
+    const resultado = document.getElementById('resultado');
+    const botonValidar = document.querySelector('.btn');
+
+    function esPalindrome(palabra) {
+      const palabraInvertida = palabra.toLowerCase().split("").reverse().join("");
+      return palabra === palabraInvertida;
+    }
+
+    botonValidar.addEventListener('click', function(event) {
+      const texto = inputTexto.value;
+      if (esPalindrome(texto)) {
+        resultado.textContent = `"${texto}" es palindrome`;
+        return;
+      }
+      resultado.textContent = `"${texto}" no es palindrome`;
+    });
+
+    inputTexto.addEventListener('input', function(event) {
+      resultado.textContent = "";
+    });
+  </script>
+  </body>
+</html>
