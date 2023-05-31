@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mayúsculas</title>
+</head>
+<body>
+  <label for="texto">Escribe algo</label>
+  <input type="text" id="texto" />
+  <button type="button" class="btn">Convertir mensaje a mayúsculas</button>
+  <p id="resultado"></p>
+  <p id="resultadoMayusculas"></p>
+
+  <script>
+    const inputTexto = document.querySelector('#texto');
+    const botonMayuculas = document.querySelector('.btn');
+    
+    const resultado = document.querySelector('#resultado');
+    // Ésta es otra manera de referenciar un elemento del DOM por su ID
+    const resultMayuscula = document.getElementById('resultadoMayusculas');
+
+    inputTexto.addEventListener('input', function(event) {
+      const texto = inputTexto.value;
+      resultado.textContent = texto;
+      resultMayuscula.innerHTML = "";
+    });
+
+    botonMayuculas.addEventListener('click', function(event) {
+      const texto = inputTexto.value.toUpperCase();
+      resultMayuscula.textContent = texto;
+    });
+  </script>
+</body>
+</html>
