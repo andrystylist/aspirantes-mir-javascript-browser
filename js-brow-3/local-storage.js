@@ -1,50 +1,67 @@
 const nombreInput = document.querySelector('#name')
 const form = document.querySelector('#form')
 const sectionResult = document.querySelector('#mensaje-nombre-guardado')
+const emailInput = document.querySelector('#email')
 
-function guardarNombre (name) {
-  if (!name) {
+const KEY_STORAGE = 'data'
+
+/**
+ *
+ * @param {{name, email}}} data
+ * @returns
+ */
+function guardarData (data) {
+  if (!data.name || !data.email) {
     return
   }
-  localStorage.setItem('name', name)
-  nombreInput.value = ''
+
+  localStorage.setItem(KEY_STORAGE, JSON.stringify(data))
 }
 
-function mostrarNombre () {
-  const name = localStorage.getItem('name')
+function showData () {
+  const strData = localStorage.getItem(KEY_STORAGE)
   const tagP = document.createElement('p')
-  let tagButton
-  let mensaje = 'No hay datos'
+  let deleteButton
+  let mensaje = 'No hay datos guardados en el local storage.'
 
-  if (name) {
-    tagButton = document.createElement('button')
-    tagButton.addEventListener('click', handleDelete)
-    tagButton.textContent = 'Borrar'
-    mensaje = `El nombre guardado es: ${name}`
+  if (strData) {
+    const data = JSON.parse(strData)
+
+    deleteButton = document.createElement('button')
+    deleteButton.textContent = 'Borrar'
+    deleteButton.addEventListener('click', handleDelete)
+    mensaje = `El nombre guardado es ${data.name} y el correo es ${data.email}.`
   }
 
   tagP.textContent = mensaje
   sectionResult.innerHTML = ''
   sectionResult.appendChild(tagP)
-  sectionResult.appendChild(tagButton)
+  sectionResult.appendChild(deleteButton)
 }
 
-function borrarNombre () {
-  localStorage.removeItem('name')
+function deleteData () {
+  localStorage.removeItem(KEY_STORAGE)
 }
 
 function handleSubmit (event) {
   event.preventDefault()
-  const nombre = nombreInput.value.trim()
-  guardarNombre(nombre)
-  mostrarNombre()
+
+  const name = nombreInput.value.trim()
+  const email = emailInput.value.trim()
+
+  guardarData({ name, email })
+
+  nombreInput.value = ''
+  emailInput.value = ''
+
+  showData()
 }
 
 function handleDelete (event) {
-  borrarNombre()
-  mostrarNombre()
+  deleteData()
+  showData()
 }
 
 form.addEventListener('submit', handleSubmit)
 
-mostrarNombre()
+showData()
