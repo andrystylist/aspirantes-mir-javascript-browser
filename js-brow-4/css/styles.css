@@ -1,0 +1,38 @@
+body {
+  background-color: #333333;
+  font-family: 'Roboto', sans-serif;
+  color: #DDDDDD;
+}
+
+a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+a.active {
+  font-weight: bold;
+  color: #FFFF00;
+}
+
+ul, li {
+  list-style: none;
+}
+
+.hidden-item {
+  display: none;
+}
+
+li.menu-item b::before {
+  cursor: pointer;
+  display: inline-block;
+  content: '📁 ';
+  width: 1.2rem;
+}
+
+li.menu-item b:hover {
+  opacity: 0.8;
+}
+
+li.menu-item b.open::before {
+  content: '📂 ';
+}
