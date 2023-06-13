@@ -22,6 +22,10 @@ ul, li {
   display: none;
 }
 
+li.menu-item b.hidden {
+  display: none;
+}
+
 li.menu-item b::before {
   cursor: pointer;
   display: inline-block;

@@ -107,15 +107,15 @@ function createMenu (menuItems) {
     a.textContent = item.name
     a.setAttribute('href', item.link)
 
-    if (hasSubMenu) {
-      const b = document.createElement('b')
-      b.addEventListener('click', toggleSubMenu)
-      li.appendChild(b)
-    }
+    const b = document.createElement('b')
+    b.addEventListener('click', toggleSubMenu)
+    b.classList.add('hidden')
+    li.appendChild(b)
 
     li.appendChild(a)
 
     if (hasSubMenu) {
+      b.classList.remove('hidden')
       // Tiene sub-menu (Recursividad)
       const subMenuUl = createMenu(item.items)
       subMenuUl.classList.add('hidden-item')
